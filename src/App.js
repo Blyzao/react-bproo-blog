@@ -1,15 +1,25 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./Navbar";
 import Home from "./Home";
+import Ajouter from "./Ajouter";
+import BlogDetails from "./BlogDetails";
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <div className="conteu">
-        <Home />
+    <Router>
+      <div className="App">
+        <Navbar />
+        <div className="contenu">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/ajouter" element={<Ajouter />} />
+            <Route path="/blogs/:id" element={<BlogDetails />} />
+            {/* Ajoutez d'autres routes ici */}
+          </Routes>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 
