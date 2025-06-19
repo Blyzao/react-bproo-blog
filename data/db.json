@@ -1,11 +1,11 @@
 {
   "blogs": [
     {
-      "id": "1",
       "title": "aliquet nec, imperdiet nec, leo.",
+      "author": "Duplex",
       "body": "a, dui. Cras pellentesque. Sed dictum. Proin eget odio. Aliquam vulputate ullamcorper magna. Sed eu eros. Nam consequat dolor vitae dolor. Donec fringilla. Donec feugiat metus sit amet ante. Vivamus non lorem vitae odio sagittis semper. Nam tempor diam dictum sapien. Aenean massa. Integer vitae nibh. Donec est mauris, rhoncus id, mollis nec, cursus a, enim. Suspendisse aliquet, sem ut cursus luctus, ipsum leo elementum sem, vitae aliquam eros turpis non enim. Mauris quis turpis vitae purus gravida sagittis. Duis gravida. Praesent eu nulla at sem molestie sodales. Mauris blandit enim consequat purus. Maecenas libero est,",
-      "author": "Grant",
-      "date": "02/01/2021"
+      "date": "2025-06-19 14:57:31.577Z",
+      "id": "1"
     },
     {
       "id": "2",
@@ -15,10 +15,10 @@
       "date": "02/01/2021"
     },
     {
-      "title": "Salut les pros",
+      "title": "Salut les Boss",
       "author": "Tony",
       "body": "Ceci cest notre body....",
-      "date": "2021-03-11 18:38:05.977Z",
+      "date": "2025-06-19 14:45:03.971Z",
       "id": "423"
     },
     {

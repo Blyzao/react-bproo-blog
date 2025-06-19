@@ -1,35 +1,73 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Ajouter = () => {
+  const { id } = useParams(); // Récupère l'ID du blog pour le mode modification
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [body, setBody] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
+  const [isEditing, setIsEditing] = useState(!!id); // Détermine si on est en mode modification
 
-  const HandleBlogAdding = (e) => {
+  // Charger les données du blog si en mode modification
+  useEffect(() => {
+    if (id) {
+      setIsLoading(true);
+      fetch(`http://localhost:8000/blogs/${id}`)
+        .then((res) => {
+          if (!res.ok) throw new Error("Blog non trouvé");
+          return res.json();
+        })
+        .then((data) => {
+          setTitle(data.title);
+          setAuthor(data.author);
+          setBody(data.body);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.error("Erreur:", error);
+          setIsLoading(false);
+          navigate("/"); // Rediriger si le blog n'existe pas
+        });
+    }
+  }, [id, navigate]);
+
+  const handleBlogSubmit = (e) => {
     e.preventDefault();
     let tmp_date = new Date().toISOString().split("T");
     const date = `${tmp_date[0]} ${tmp_date[1]}`;
     const blog = { title, author, body, date };
     setIsLoading(true);
-    fetch("http://localhost:8000/blogs", {
-      method: "POST",
+
+    const url = isEditing
+      ? `http://localhost:8000/blogs/${id}`
+      : "http://localhost:8000/blogs";
+    const method = isEditing ? "PUT" : "POST";
+
+    fetch(url, {
+      method,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(blog),
-    }).then(() => {
-      setTitle("");
-      setAuthor("");
-      setBody("");
-      setIsLoading(false);
-      console.log("Nouveau blog ajouté");
-      navigate("/");
-    });
+    })
+      .then(() => {
+        setIsLoading(false);
+        console.log(isEditing ? "Blog modifié" : "Nouveau blog ajouté");
+        setTitle("");
+        setAuthor("");
+        setBody("");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error("Erreur:", error);
+        setIsLoading(false);
+      });
   };
+
   return (
     <div className="create-blog">
-      <form onSubmit={HandleBlogAdding} className="form">
+      <h2>{isEditing ? "Modifier l'article" : "Ajouter un nouvel article"}</h2>
+      <form onSubmit={handleBlogSubmit} className="form">
         <div className="form-group">
           <label htmlFor="title">Titre de l'article</label>
           <input
@@ -42,7 +80,7 @@ const Ajouter = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="author">Selectionez un auteur</label>
+          <label htmlFor="author">Sélectionnez un auteur</label>
           <select
             required
             className="form-control"
@@ -69,12 +107,12 @@ const Ajouter = () => {
         <div className="form-group">
           {!isLoading && (
             <button type="submit" className="btn-create">
-              Creer Article
+              {isEditing ? "Enregistrer les modifications" : "Créer Article"}
             </button>
           )}
           {isLoading && (
             <button type="submit" className="btn-create" disabled>
-              En cour de traitement ...
+              {isEditing ? "Enregistrement..." : "En cours de traitement..."}
             </button>
           )}
         </div>

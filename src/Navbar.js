@@ -15,8 +15,8 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/ajouter" className="lien buttonArticle">
-            Articles
+          <Link to="/blogs/add" className="lien buttonArticle">
+            Ajouter un article
           </Link>
         </li>
         <li>

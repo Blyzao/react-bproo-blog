@@ -14,7 +14,8 @@ function App() {
         <div className="contenu">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/ajouter" element={<Ajouter />} />
+            <Route path="/blogs/add" element={<Ajouter />} />
+            <Route path="/blogs/:id/edit" element={<Ajouter />} />
             <Route path="/blogs/:id" element={<BlogDetails />} />
             <Route path="*" element={<NotFound />} />
             {/* Ajoutez d'autres routes ici */}

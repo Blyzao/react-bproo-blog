@@ -40,6 +40,12 @@ const BlogDetails = () => {
           </small>
           <p className="blog-body">{blog.body}</p>
           <p className="blog-author">Publié par : {blog.author}</p>
+          <button
+            onClick={() => navigate(`/blogs/${id}/edit`)}
+            className="btn-secondary"
+          >
+            Modifier
+          </button>
           <button onClick={() => setShowConfirm(true)} className="btn-danger">
             Supprimer
           </button>
