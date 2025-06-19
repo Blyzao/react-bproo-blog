@@ -6,7 +6,7 @@ const Home = () => {
     datas: blogs,
     isLoading,
     error,
-  } = useFetch("http://localhost:8000/blogs");
+  } = useFetch("http://localhost:8000/blogs?_sort=id&_order=desc");
 
   return (
     <div className="home">
